@@ -8,21 +8,27 @@ const path = require("path");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
-// GET returns the notes.html
+
+
+// GET request renders notes.html
 app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
-// GET the /api/notes read JSON file and returns saved notes as JSON
+
+
+// GET the rendered notes plus any new notes
 app.get("/api/notes", (req, res) => {
   res.send(fs.readFileSync("./db/db.json", "utf8"));
 });
-// GET returns the the index.html
+
+
+// GET renders the the index.html
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
 });
-// POST /api/notes recives new note to save on the request body
-// THEN adds to the db.json file and returns new note to client
-// ALSO adds a unique ID to each note when saved using UUID
+
+
+// POST to create new notes
 app.post("/api/notes", (req, res) => {
   let newNote = req.body;
   newNote.id = uuid();
@@ -34,7 +40,9 @@ app.post("/api/notes", (req, res) => {
   );
   res.json(newNote);
 });
-// DELETE note and update db.json
+
+
+// DELETE note by ID and update db.json
 app.delete("/api/notes/:id", (req, res) => {
     let id = req.params.id.toString();
     console.log(id, "ID posted!");
@@ -46,6 +54,7 @@ app.delete("/api/notes/:id", (req, res) => {
 });
 
 
+// Initiates server and triggers listeners for front-end requests on port defined in documentation
 app.listen(PORT, () => {
   console.log(`API server now on port ${PORT}!`);
 });
