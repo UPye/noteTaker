@@ -1,8 +1,11 @@
+// Defining variables
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+
+// Assigning values to the vriables above
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -33,7 +36,7 @@ const getNotes = () =>
     },
   });
 
-
+// Fetch request for saving notes
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -52,7 +55,7 @@ const deleteNote = (id) =>
     },
   });
 
-
+// Ensures updates show in real time.
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   if (activeNote.id) {
@@ -66,7 +69,7 @@ const renderActiveNote = () => {
   }
 };
 
-
+// Captures user input value, assigns it to a variable, and calls it into constant above
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -176,5 +179,5 @@ if (window.location.pathname === '/notes') {
 }
 
 
-
+// Event listener
 getAndRenderNotes();

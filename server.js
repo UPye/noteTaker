@@ -1,9 +1,11 @@
+// Defining constants needed to run the server
 const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const { v4: uuid } = require("uuid");
 const fs = require("fs");
 const path = require("path");
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
