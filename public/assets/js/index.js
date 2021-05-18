@@ -5,7 +5,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-// Assigning values to the vriables above
+// Assigning values to the variables above
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
